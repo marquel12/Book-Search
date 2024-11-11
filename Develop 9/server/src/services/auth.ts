@@ -4,13 +4,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-interface JwtPayload {
-  {
-    username: string;
-    email: string;
-    _id: unknown;
-  };
-}
 
 
 export const authenticateToken = ({ req }: any) => {
