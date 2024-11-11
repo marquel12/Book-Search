@@ -1,16 +1,24 @@
+
 import db from "../config/connection.js";
-import models from "../models/index.js";
 import cleanDB from "./cleanDB.js";
+import User from "../models/User.js";
+import userData from  './userData.json' with {type: "json"};
 
-const { Tech } = models;
 
-import techData from './techData.json' with { type: "json" };
+const seedDB = async () => {
+  try {
+    await db;
+    await cleanDB();
 
-db.once('open', async () => {
-  await cleanDB('Tech', 'teches');
+    await User.insertMany(userData);
 
-  await Tech.insertMany(techData);
+    console.log("Data seeded successfully!");
 
-  console.log('Technologies seeded!');
-  process.exit(0);
-});
+    process.exit(0);
+  } catch (err) {
+    console.error("Error seeding data:", err);
+    process.exit(1);
+  }
+}
+
+seedDB();
