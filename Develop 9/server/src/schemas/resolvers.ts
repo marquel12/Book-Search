@@ -1,7 +1,7 @@
 
 import User from '../models/User';
 import { signToken, AuthenticationError } from '../services/auth';
-import Book from '../models/Book';
+// import Book from '../models/Book';
 
 // define types for the arguments passed into the resolvers
 
@@ -19,9 +19,9 @@ interface AddUserArgs {
     
 }
 
-interface BookArgs {
-    bookId: string;
-}
+// interface BookArgs {
+//     bookId: string;
+// }
 
 interface SaveBookArgs {
     input: {
@@ -62,8 +62,10 @@ const resolvers = {
             // if user is not authenticated return an error
             throw new AuthenticationError('You need to be logged in!');
         }
-            },
-            //Query to get book by id
+    },
+ 
+
+       
     },
     Mutation: {
         // Mutation to add a user
