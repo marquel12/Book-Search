@@ -10,7 +10,7 @@ const seedDB = async () => {
     await db;
     await cleanDB();
 
-    await User.insertMany(userData);
+    await User.create(userData);
 
     console.log("Data seeded successfully!");
 

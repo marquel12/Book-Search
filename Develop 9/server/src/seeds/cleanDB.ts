@@ -6,6 +6,9 @@ const cleanDB = async (): Promise<void> => {
   
     // Delete documents from User collection
     await User.deleteMany({});
+    if(!User) {
+      throw new Error('User collection not found.');
+    }
     console.log('User collection cleaned.');
 
   } catch (err) {
