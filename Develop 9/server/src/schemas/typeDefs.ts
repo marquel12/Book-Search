@@ -52,8 +52,10 @@ input AddUserInput {
 type mutation {
     login(email: String!, password: String!): Auth
     addUser(input: AddUserInput: Auth
-    addBook(input: BookInput: String!): User
+    saveBook(input: BookInput: String!): User
     removeBook(bookId: String!): User 
 }
 
 `;
+
+export default typeDefs;
