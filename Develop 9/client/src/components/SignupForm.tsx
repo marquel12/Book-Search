@@ -36,13 +36,8 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
     try {
       const {data} = await addUser({
-        variables: {input: {username: userFormData.username, email: userFormData.email, password: userFormData.password}}
-      })
-
-      if (!data.ok) {
-        throw new Error('something went wrong!');
-      }
-
+        variables: {input: {...userFormData}} // this will be the input for the addUser mutation in the server
+      });
       
       Auth.login(data.addUser.token);
     } catch (err) {

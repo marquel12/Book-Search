@@ -1,7 +1,9 @@
 
+
 import User from '../models/User';
 import { signToken, AuthenticationError } from '../services/auth';
-// import Book from '../models/Book';
+
+
 
 // define types for the arguments passed into the resolvers
 
@@ -19,9 +21,7 @@ interface AddUserArgs {
     
 }
 
-// interface BookArgs {
-//     bookId: string;
-// }
+
 
 interface SaveBookArgs {
     input: {
@@ -45,13 +45,13 @@ interface LoginUserArgs {
 
 
 
+
+
 const resolvers = {
 
     // Query to get a single user by either their id or their username
     Query: {
-        users: async (_parent: any, { _id, username }: UserArgs) => {
-            return User.find().populate('savedBooks');
-        },
+       
         user: async (_parent: any, { _id, username }: UserArgs) => {
             return User.findOne({ _id, username }).populate('savedBooks');
         },
@@ -67,8 +67,7 @@ const resolvers = {
         }
     },
 
-    // Query to search for books    
-
+  
  
 
        
