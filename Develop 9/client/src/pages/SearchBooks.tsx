@@ -35,12 +35,10 @@ const SearchBooks = () => {
 
     try {
       const response = await searchGoogleBooks(searchInput);
+      console.log(response);
 
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
-
-      const { items } = await response.json();
+      
+      const { items } = response;
 
       const bookData = items.map((book: GoogleAPIBook) => ({
         bookId: book.id,

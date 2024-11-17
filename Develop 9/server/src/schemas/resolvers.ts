@@ -1,16 +1,12 @@
 
 
-import User from '../models/User';
-import { signToken, AuthenticationError } from '../services/auth';
+import {User} from '../models/index.js';
+import { signToken, AuthenticationError } from '../services/auth.js';
 
 
 
 // define types for the arguments passed into the resolvers
 
-interface UserArgs {
-    _id: string;
-    username: string;
-}
 
 interface AddUserArgs {
     input:{
@@ -24,14 +20,14 @@ interface AddUserArgs {
 
 
 interface SaveBookArgs {
-    input: {
+    
     authors: string[];
     description: string;
     title: string;
     bookId: string;
     image: string;
     link: string;
-    }
+    
 }
 
 interface RemoveBookArgs {
@@ -49,29 +45,19 @@ interface LoginUserArgs {
 
 const resolvers = {
 
-    // Query to get a single user by either their id or their username
-    Query: {
-       
-        user: async (_parent: any, { _id, username }: UserArgs) => {
-            return User.findOne({ _id, username }).populate('savedBooks');
-        },
         // Query to get the authenticated user info
     Query: {
         me: async (_parent: any, _args: any, context: any) => {
             // if user is authenticated return the user data
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('savedBooks');
+                console.log(context.user);
+                return User.findOne({ _id: context.user.email }).populate('savedBooks');
             }
             // if user is not authenticated return an error
             throw new AuthenticationError('You need to be logged in!');
         }
     },
 
-  
- 
-
-       
-    },
     Mutation: {
         // Mutation to add a user
         addUser: async (_parent: any, { input }: AddUserArgs) => {
@@ -84,6 +70,7 @@ const resolvers = {
         login: async (_parent: any, { email, password }: LoginUserArgs) => {
             // find user by email
             const user = await User.findOne({ email });
+            
             // if user not found return an error
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials');
@@ -100,11 +87,11 @@ const resolvers = {
         },
 
         // Mutation to save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
-        saveBook: async (_parent: any, { input }: SaveBookArgs, context: any) => {
+        saveBook: async (_parent: any, { input }: {input: SaveBookArgs}, context: any) => {
             // if user is authenticated
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
+                    { _id: context.user.email },
                     { $addToSet: { savedBooks: input } },
                     { new: true, runValidators: true }
                 );
@@ -119,7 +106,7 @@ const resolvers = {
             // if user is authenticated
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
+                    { _id: context.user.email },
                     { $pull: { savedBooks: { bookId } } },
                     { new: true }
                 );

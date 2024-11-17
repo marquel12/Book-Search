@@ -9,7 +9,7 @@ query me {
         username
         email
         savedBooks {
-            _id
+            
             authors
             description
             bookId
@@ -29,7 +29,7 @@ query user($username: String!) {
         username
         email
         savedBooks {
-            _id
+            
             authors
             description
             bookId
@@ -45,7 +45,7 @@ query user($username: String!) {
 export const GET_ME_BOOKS = gql`
 query meBooks {
     savedBooks {
-        _id
+        
         authors
         description
         bookId

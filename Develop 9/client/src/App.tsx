@@ -16,7 +16,7 @@ const httpLink = createHttpLink({
 });
 // construct request middleware that will attach the token to the headers
 const authlink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('id_token');
   return {
     headers: {
       ...headers,

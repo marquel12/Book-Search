@@ -1,4 +1,6 @@
-const typeDefs = `
+import { gql } from "graphql-tag";
+
+const typeDefs = gql`
 
 type User {
     _id: ID!
@@ -22,7 +24,7 @@ type Auth {
     user: User
 }
 
-type query {
+type Query {
     me: User
 }
 
@@ -41,18 +43,11 @@ input AddUserInput {
         link: String
     }
 
-    type Query {
-    users: [User]
-    searchBooks(query: String!): [Book]    
-    user(username: String!): User  
-    book(bookId: String!): Book  
-    savedBooks: [Book] 
-}
 
-type mutation {
+type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(input: AddUserInput: Auth
-    saveBook(input: BookInput: String!): User
+    addUser(input: AddUserInput): Auth
+    saveBook(input: BookInput): User
     removeBook(bookId: String!): User 
 }
 
