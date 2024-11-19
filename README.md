@@ -5,7 +5,6 @@ The purpose of this project was to take a fully functioning Google Books API sea
 
 
 
-
  ## Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)
@@ -59,4 +58,4 @@ The purpose of this project was to take a fully functioning Google Books API sea
 
   
   ## Questions
-  If you have any questions about this repo, please contact me directly at marqueljamal12@gmail.com. You can find more of my work on github at [marquel12](https://github.com/marquel12/Kanban-Board) 
+  If you have any questions about this repo, please contact me directly at marqueljamal12@gmail.com. You can find more of my work on github at [marquel12](https://github.com/marquel12/Book-Search) 
